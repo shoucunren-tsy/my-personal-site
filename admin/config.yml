@@ -36,7 +36,7 @@ collections:
         name: "root"
         widget: "list"
         summary: "{{fields.name}}"
-        field:
+        fields:  # 👈 这里修复了！原来是 field
           - { label: "奖项名称", name: "name", widget: "string" }
           - { label: "年份", name: "year", widget: "string", default: "2025" }
           - { label: "奖项等级", name: "level", widget: "string", default: "一等奖" }
