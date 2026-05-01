@@ -17,11 +17,11 @@ collections:
       preview: false
     fields:
       - { label: "头像", name: "avatar", widget: "image", default: "/images/avatar.jpg" }
-      - { label: "微信二维码图片", name: "wechat_qr", widget: "image", default: "/images/wechat_qr.png" }
-      - { label: "匿名昵称", name: "nickname", widget: "string", default: "创意星河" }
-      - { label: "创意标语", name: "tagline", widget: "string", default: "把每个想法变成奖杯" }
-      - { label: "自我介绍", name: "bio", widget: "text", default: "我是一个脑子里装满天马行空的大学生..." }
-      - { label: "手机号码", name: "phone", widget: "string", pattern: ['^[0-9+\-() ]+$', '请输入有效号码'] }
+      - { label: "微信二维码", name: "wechat_qr", widget: "image", default: "/images/wechat_qr.png" }
+      - { label: "昵称", name: "nickname", widget: "string", default: "创意大学生" }
+      - { label: "标语", name: "tagline", widget: "string", default: "把每个想法变成奖杯" }
+      - { label: "自我介绍", name: "bio", widget: "text", default: "我喜欢创造有趣的东西。" }
+      - { label: "手机号码", name: "phone", widget: "string", default: "13800000000" }
       - { label: "简历文件", name: "resume_url", widget: "file", required: false }
 
   - name: "awards"
@@ -31,14 +31,12 @@ collections:
     extension: json
     format: json
     slug: "awards"
-    editor:
-      preview: false
     fields:
       - label: "奖项列表"
         name: "root"
         widget: "list"
         summary: "{{fields.name}}"
-        field: 
+        field:
           - { label: "奖项名称", name: "name", widget: "string" }
           - { label: "年份", name: "year", widget: "string", default: "2025" }
           - { label: "奖项等级", name: "level", widget: "string", default: "一等奖" }
@@ -53,8 +51,6 @@ collections:
     extension: json
     format: json
     slug: "skills"
-    editor:
-      preview: false
     fields:
       - label: "技能列表"
         name: "root"
