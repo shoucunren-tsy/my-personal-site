@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>创意大学生 · 个人主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Poppins', 'Inter', system-ui, sans-serif;
+            background: radial-gradient(circle at 20% 30%, #0a0f1e, #03060c);
+            color: #eef5ff;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+        .glass-card {
+            background: rgba(15, 25, 45, 0.55);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(72, 187, 255, 0.2);
+            border-radius: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease, border-color 0.2s;
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 212, 255, 0.6);
+            transform: translateY(-4px);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            background: rgba(3, 10, 20, 0.7);
+            border-bottom: 1px solid rgba(72, 187, 255, 0.2);
+            padding: 1rem 0;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #ccdeff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: #4c9aff;
+            text-shadow: 0 0 5px rgba(76, 154, 255, 0.5);
+        }
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #2b7aff;
+            box-shadow: 0 0 20px rgba(43, 122, 255, 0.4);
+            margin-bottom: 1.5rem;
+        }
+        .nickname {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFFFFF, #7ab3ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .tagline {
+            font-size: 1.3rem;
+            color: #b9d0ff;
+            margin-bottom: 2rem;
+        }
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 0.75rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(4px);
+            color: white;
+            border: 1px solid rgba(76,154,255,0.5);
+        }
+        .btn-primary {
+            background: linear-gradient(105deg, #2b7aff, #6b4eff);
+            border: none;
+            box-shadow: 0 4px 12px rgba(43,122,255,0.3);
+        }
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(43,122,255,0.5);
+        }
+        .btn-outline:hover {
+            background: rgba(43,122,255,0.2);
+            border-color: #3e8eff;
+        }
+        section {
+            padding: 5rem 0;
+        }
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+        .section-title span {
+            background: linear-gradient(135deg, #9bc0ff, #4c9aff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+        .award-card {
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+        }
+        .award-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .award-year {
+            font-size: 0.85rem;
+            color: #8aacff;
+            margin-bottom: 0.75rem;
+        }
+        .award-level {
+            background: rgba(0,212,255,0.2);
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            display: inline-block;
+            font-size: 0.8rem;
+        }
+        .skills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+        .skill-tag {
+            background: rgba(100, 150, 255, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 500;
+            border: 1px solid rgba(76,154,255,0.3);
+            transition: 0.1s;
+        }
+        .skill-tag:hover {
+            background: rgba(43,122,255,0.3);
+            transform: translateY(-2px);
+        }
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .contact-item {
+            flex: 1;
+            min-width: 220px;
+            text-align: center;
+            padding: 1.5rem;
+        }
+        .qr-img {
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
+            margin: 0 auto 1rem;
+            border-radius: 1rem;
+            background: white;
+            padding: 0.5rem;
+        }
+        .phone-number {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin: 1rem 0;
+        }
+        .call-link {
+            color: #4c9aff;
+            text-decoration: none;
+            border-bottom: 1px dashed;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: #6a7a9e;
+            border-top: 1px solid rgba(76,154,255,0.2);
+        }
+        @media (max-width: 768px) {
+            .nickname { font-size: 2rem; }
+            .tagline { font-size: 1rem; }
+            .container { padding: 0 1rem; }
+            section { padding: 3rem 0; }
+            .contact-item { min-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="container">
+        <div class="nav-links">
+            <a href="#hero">首页</a>
+            <a href="#about">关于</a>
+            <a href="#awards">获奖</a>
+            <a href="#skills">技能</a>
+            <a href="#contact">联系</a>
+        </div>
+    </div>
+</nav>
+<main>
+    <section id="hero" class="hero">
+        <div class="container" style="text-align: center;">
+            <img id="avatarImg" class="avatar" src="images/avatar.jpg" alt="头像" onerror="this.src='https://placehold.co/200x200?text=Avatar'">
+            <h1 id="nickname" class="nickname">加载中...</h1>
+            <p id="tagline" class="tagline"></p>
+            <div class="btn-group">
+                <a id="resumeBtn" class="btn btn-primary" href="#" download>📄 下载简历</a>
+            </div>
+        </div>
+    </section>
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title"><span>✨</span> 关于我</h2>
+            <div class="glass-card" style="padding: 2rem; max-width: 800px; margin: 0 auto;">
+                <p id="bio" style="font-size: 1.1rem; line-height: 1.6;">正在加载个人简介...</p>
+            </div>
+        </div>
+    </section>
+    <section id="awards">
+        <div class="container">
+            <h2 class="section-title"><span>🏆</span> 荣誉奖项</h2>
+            <div id="awardsList" class="awards-grid"></div>
+        </div>
+    </section>
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title"><span>⚡</span> 技能与创意</h2>
+            <div id="skillsList" class="skills-wrapper"></div>
+        </div>
+    </section>
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title"><span>📞</span> 联系我</h2>
+            <div class="contact-grid">
+                <div class="glass-card contact-item">
+                    <img id="wechatQr" class="qr-img" src="images/wechat_qr.png" alt="微信二维码" onerror="this.src='https://placehold.co/200x200?text=QR+Code'">
+                    <p style="margin-top: 0.5rem;">📱 扫码加微信</p>
+                </div>
+                <div class="glass-card contact-item">
+                    <div class="phone-number" id="phoneDisplay">加载中...</div>
+                    <a id="callLink" href="tel:" class="btn btn-outline" style="margin-top: 0.5rem;">📞 直接拨打</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>✨ 保持创意 · 无限可能 ✨</p>
+    <p><small>可通过 <a href="/admin" style="color:#4c9aff;">后台管理</a> 更新内容</small></p>
+</footer>
+<script>
+    async function loadData() {
+        try {
+            const [profileRes, awardsRes, skillsRes] = await Promise.all([
+                fetch('data/profile.json'),
+                fetch('data/awards.json'),
+                fetch('data/skills.json')
+            ]);
+            if (!profileRes.ok || !awardsRes.ok || !skillsRes.ok) throw new Error('数据加载失败');
+            const profile = await profileRes.json();
+            const awards = await awardsRes.json();
+            const skills = await skillsRes.json();
+
+            document.getElementById('avatarImg').src = profile.avatar || 'images/avatar.jpg';
+            document.getElementById('nickname').innerText = profile.nickname || '创意大学生';
+            document.getElementById('tagline').innerText = profile.tagline || '将想法变成奖杯';
+            document.getElementById('bio').innerHTML = profile.bio.replace(/\n/g, '<br>');
+            // 微信二维码（支持后台字段）
+            if (profile.wechat_qr) document.getElementById('wechatQr').src = profile.wechat_qr;
+            // 电话
+            const phone = profile.phone || '';
+            document.getElementById('phoneDisplay').innerText = phone;
+            const callLink = document.getElementById('callLink');
+            if (phone) callLink.href = `tel:${phone}`;
+            else callLink.style.display = 'none';
+            // 简历
+            const resumeBtn = document.getElementById('resumeBtn');
+            if (profile.resume_url) {
+                resumeBtn.href = profile.resume_url;
+                resumeBtn.download = '';
+            } else {
+                resumeBtn.href = '#';
+                resumeBtn.innerText = '📄 简历待更新';
+            }
+
+            const awardsContainer = document.getElementById('awardsList');
+            if (awards.length === 0) {
+                awardsContainer.innerHTML = '<div class="glass-card award-card">暂无获奖，下一次比赛你就是冠军🏆</div>';
+            } else {
+                awardsContainer.innerHTML = awards.map(award => `
+                    <div class="glass-card award-card">
+                        <div class="award-name">${escapeHtml(award.name)}</div>
+                        <div class="award-year">📅 ${award.year || '未知年份'}</div>
+                        <div class="award-level">🏅 ${escapeHtml(award.level)}</div>
+                    </div>
+                `).join('');
+            }
+
+            const skillsContainer = document.getElementById('skillsList');
+            if (skills.length === 0) {
+                skillsContainer.innerHTML = '<span class="skill-tag">创意无限</span><span class="skill-tag">待补充</span>';
+            } else {
+                skillsContainer.innerHTML = skills.map(skill => `<span class="skill-tag">${escapeHtml(skill)}</span>`).join('');
+            }
+        } catch (err) {
+            console.error(err);
+            document.getElementById('nickname').innerText = '数据加载出错';
+            document.getElementById('bio').innerHTML = '请检查 data/ 下的 JSON 文件是否存在且格式正确。';
+        }
+    }
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    loadData();
+</script>
+</body>
+</html>
